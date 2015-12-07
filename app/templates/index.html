@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Fantasy Football Recommendations</title>
+		<meta charset=utf-8 />
+	    <meta name="viewport" content="width=device-width" />
+	    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/index.css') }}">
+	    <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+	    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='ionicons-2.0.1/css/ionicons.css') }}">
+	</head>
+	<body>
+		<div id="input-page">
+			<form id="player-form" method="post">
+				<input type="text" id="player-input" name="name" placeholder="Enter a player name">
+
+				<div id="results-panel">
+					<div id="result">
+
+					</div>
+					<div id="ajax-loader" style="background-image: url({{ url_for('static', filename='img/ajax-loader.gif') }})"></div>
+					<div id="more-results">
+						<div>More Statistics</div>
+						<div class="ion-android-arrow-dropdown"></div>
+					</div>
+				</div>
+
+			</form>
+		</div>
+		
+		<div id="stats-page">
+			<div id="stats-overview">
+				<div id="search-button">
+					<div class="ion-android-arrow-dropup"></div>
+					<div>Back</div>
+				</div>
+
+				<div id="overview-summary">
+					<div id="pos-num">Positive Tweets: <span>0</span></div>
+					<div id="neg-num">Negative Tweets: <span>0</span></div>
+				</div>
+			</div>
+
+			<div id="tweet-filter">
+				<span>Show: </span>
+				<input type="checkbox" id="pos-check" name="classification" value="pos" checked>Positive
+				<input type="checkbox" id="neg-check" name="classification" value="neg" checked>Negative
+			</div>
+
+			<div id="tweet-list"></div>
+		</div>
+
+		<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.1.min.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>
+	</body>
+</html>

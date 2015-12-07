@@ -1,0 +1,185 @@
+body{
+	background: #F2F2F2;
+	font-family: 'Quicksand', sans-serif;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#input-page{
+	position: absolute;
+	top: 0; left: 0; right: 0;
+	height: 100%;
+}
+
+#player-form{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	top: 30%; left: 50%; bottom: 20px;
+	margin-left: -250px;
+	margin-top: -30px
+}
+
+#player-input{
+	width: 100%;
+	height: auto;
+	padding: 10px;
+	box-sizing: border-box;
+	font-size: 30px;
+	border-radius: 4px;
+	border: none;
+	-webkit-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.48);
+	-moz-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.48);
+	box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.48);
+}
+
+#results-panel{
+	width: 100%;
+	position: absolute;
+	top: 100px; bottom: 0;
+}
+
+#result{
+	width: 100%;
+	text-align: center;
+	font-size: 30px;
+}
+
+#ajax-loader{
+	width: 31px;
+	height: 31px;
+	margin: 0 auto;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	display: none;
+}
+
+#more-results{
+	width: 120px;
+	height: auto;
+	position: absolute;
+	bottom: 0; left: 0; right: 0;
+	margin: auto;
+	text-align: center;
+	padding: 10px;
+	cursor: pointer;
+	display: none;
+}
+#search-button{
+	width: 120px;
+	height: auto;
+	position: absolute;
+	top: 0; left: 0; right: 0;
+	margin: auto;
+	text-align: center;
+	padding: 10px;
+	cursor: pointer;
+}
+
+#more-results:hover, #search-button:hover{
+	background: lightgrey;
+}
+
+#more-results div, #search-button div{
+	width: auto;
+	text-align: center;
+}
+#more-results .ion-android-arrow-dropdown, #search-button .ion-android-arrow-dropup{
+	font-size: 50px;
+}
+
+#stats-page{
+	position: absolute;
+	top: 100%; left: 0; right: 0;
+	height: 99%;
+}
+
+#stats-overview{
+	position: absolute;
+	top: 0; left: 0; right: 0;
+	width: 85%;
+	height: 150px;
+	margin: auto;
+}
+
+#overview-summary{
+	position: absolute;
+	top: 120px;
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+#overview-summary div{
+	flex: 1;
+	text-align: center;
+	font-size: 25px;
+}
+
+#tweet-filter{
+	position: absolute;
+	top: 180px; left: 0; right: 0;
+	width: 85%;
+	height: auto;
+	margin: auto;
+}
+
+#tweet-list{
+	position: absolute;
+	top: 210px; bottom: 0; left: 0; right: 0;
+	width: 85%;
+	margin: auto;
+	overflow: auto;
+	border-top: 1px grey solid;
+}
+
+.tweet{
+	width: 99.5%;
+	height: 200px;
+	border: 1px lightgrey solid;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.tweet:hover{
+	background: lightgrey;
+}
+
+.tweet-index{
+	padding: 0 20px;
+}
+
+.tweet-info{
+	width: auto;
+	padding: 0 20px;
+}
+
+.tweet-info div{
+	width: 100px;
+	text-align: center;
+}
+
+.tweet-text{
+	flex: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
