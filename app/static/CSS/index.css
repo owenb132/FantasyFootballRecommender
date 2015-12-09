@@ -128,10 +128,30 @@ body{
 	height: auto;
 	margin: auto;
 }
+#tweet-filter input{
+	margin-left: 5px;
+}
+
+#tweet-overview{
+	position: absolute;
+	top: 200px; left: 0; right: 0;
+	width: 85%;
+	margin: auto;
+	height: auto;
+	display: flex;
+}
+
+#tweet-overview div{
+	flex: 1;
+}
+
+#tweet-overview > div > div{
+	display: inline-block;
+}
 
 #tweet-list{
 	position: absolute;
-	top: 210px; bottom: 0; left: 0; right: 0;
+	top: 220px; bottom: 0; left: 0; right: 0;
 	width: 85%;
 	margin: auto;
 	overflow: auto;
@@ -162,13 +182,18 @@ body{
 .tweet-info div{
 	width: 100px;
 	text-align: center;
+	margin: 1px 0;
+}
+.tweet-info button{
+	width: auto;
+	float: left;
+	clear: both;
+	margin: 1px 0;
 }
 
 .tweet-text{
 	flex: 1;
 }
-
-
 
 
 

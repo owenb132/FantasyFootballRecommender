@@ -44,6 +44,23 @@
 				<span>Show: </span>
 				<input type="checkbox" id="pos-check" name="classification" value="pos" checked>Positive
 				<input type="checkbox" id="neg-check" name="classification" value="neg" checked>Negative
+				<input type="checkbox" id="correct-check" name="classification" value="correct" checked>Correct
+				<input type="checkbox" id="incorrect-check" name="classification" value="incorrect" checked>Incorrect
+				<input type="checkbox" id="included-check" name="classification" value="included" checked>Included
+				<input type="checkbox" id="rem-check" name="classification" value="removed">Removed
+			</div>
+
+			<div id="tweet-overview">
+				<div id="incorrect-info">
+					<div># Incorrect - </div>
+					<div id="num-incorrect">Total: <span>0</span></div>,
+					<div id="num-incorrect-pos">Pos: <span>0</span></div>,
+					<div id="num-incorrect-neg">Neg: <span>0</span></div>
+				</div>
+				<div id="removed-info">
+					<div># Removed - </div>
+					<div id="num-removed">Total: <span>0</span></div>
+				</div>
 			</div>
 
 			<div id="tweet-list"></div>
