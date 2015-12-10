@@ -183,7 +183,7 @@ function ignoreTweet(tweet){
 	tweet.find($('.remove-button'))
 		.removeClass('remove-button')
 		.addClass('add-button')
-		.text('Included');
+		.text('Include');
 
 	tweet.find('.incorrect-button').prop('disabled',true);
 	tweet.find('.correct-button').prop('disabled',true);
