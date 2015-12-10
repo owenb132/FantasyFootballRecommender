@@ -183,7 +183,7 @@ function ignoreTweet(tweet){
 	tweet.find($('.remove-button'))
 		.removeClass('remove-button')
 		.addClass('add-button')
-		.text('Include');
+		.html('Include');
 
 	tweet.find('.incorrect-button').prop('disabled',true);
 	tweet.find('.correct-button').prop('disabled',true);
@@ -200,7 +200,7 @@ function includeTweet(tweet){
 	tweet.find($('.add-button'))
 		.removeClass('add-button')
 		.addClass('remove-button')
-		.text('Remove');
+		.html('Remove');
 
 	if($(this).hasClass('incorrect')){
 		$('#num-incorrect span').text(parseInt($('#num-incorrect span').text()) + 1);
