@@ -92,7 +92,8 @@ body{
 
 #stats-page{
 	position: absolute;
-	top: 100%; left: 0; right: 0;
+	top: 100%;
+	width: 100%;
 	height: 99%;
 }
 
@@ -118,12 +119,19 @@ body{
 #overview-summary div{
 	flex: 1;
 	text-align: center;
+	flex-basis: 50%;
+}
+#pos-num, #neg-num{
 	font-size: 25px;
+}
+#pos-percent, #neg-percent{
+	font-size: 18px;
 }
 
 #tweet-filter{
 	position: absolute;
-	top: 180px; left: 0; right: 0;
+	top: 230px; left: 0; right: 0;
+	
 	width: 85%;
 	height: auto;
 	margin: auto;
@@ -134,15 +142,19 @@ body{
 
 #tweet-overview{
 	position: absolute;
-	top: 200px; left: 0; right: 0;
+	top: 190px; left: 0; right: 0;
 	width: 85%;
 	margin: auto;
 	height: auto;
 	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
 }
 
 #tweet-overview div{
 	flex: 1;
+	flex-basis: 50%;
 }
 
 #tweet-overview > div > div{
@@ -151,7 +163,7 @@ body{
 
 #tweet-list{
 	position: absolute;
-	top: 220px; bottom: 0; left: 0; right: 0;
+	top: 250px; bottom: 0; left: 0; right: 0;
 	width: 85%;
 	margin: auto;
 	overflow: auto;
@@ -195,11 +207,76 @@ body{
 	flex: 1;
 }
 
+#evaluation-button{
+	position: absolute;
+	right: 0px;
+	top: 50%;
+	font-size: 30px;
+	padding: 15px
+}
+#evaluation-button:hover{
+	background: lightgrey;
+}
 
+#evaluation-page{
+	position: absolute;
+	top: 100%; left: 100%;
+	width: 100%;
+	height: 99%;
+}
 
+#evaluation-button-back{
+	position: absolute;
+	left: 0px;
+	top: 50%;
+	font-size: 30px;
+	padding: 15px
+}
+#evaluation-button-back:hover{
+	background: lightgrey;
+}
 
+#evaluation-table{
+	position: absolute;
+	top: 85px; left: 0; right: 0;
+	width: 75%;
+	height: auto;
+	margin: auto;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	border: 1px black solid;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+.table-spacing{
+	border: none !important;
+}
+#evaluation-table div{
+	flex-basis: 33.33%;
+	border: 1px lightgrey solid;
+	box-sizing: border-box;
+	padding: 5px;
+	font-size: 25px;
+}
 
+#eval-values{
+	position: absolute;
+	top: 255px; left: 0; right: 0;
+	width: 75%;
+	height: auto;
+	margin: auto;
+}
 
+#eval-values div{
+	width: 100%;
+	font-size: 26px;
+	margin: 10px;
+	float: left;
+}
 
 
 

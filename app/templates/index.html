@@ -37,6 +37,29 @@
 				<div id="overview-summary">
 					<div id="pos-num">Positive Tweets: <span>0</span></div>
 					<div id="neg-num">Negative Tweets: <span>0</span></div>
+					<div id="pos-percent"></div>
+					<div id="neg-percent"></div>
+				</div>
+			</div>
+
+			<div id="tweet-overview">
+				<div id="incorrect-info">
+					<div># Incorrect - </div>
+					<div id="num-incorrect">Total: <span>0</span></div>,
+					<div id="num-incorrect-pos">Pos: <span>0</span></div>,
+					<div id="num-incorrect-neg">Neg: <span>0</span></div>
+				</div>
+
+				<div id="correct-percentage">
+					<div>Correct - </div>
+					<div id="perc-correct"><span>0</span></div>,
+					<div id="perc-correct-pos">Pos: <span>0</span></div>,
+					<div id="perc-correct-neg">Neg: <span>0</span></div>
+				</div>
+
+				<div id="removed-info">
+					<div># Removed - </div>
+					<div id="num-removed">Total: <span>0</span></div>
 				</div>
 			</div>
 
@@ -50,20 +73,38 @@
 				<input type="checkbox" id="rem-check" name="classification" value="removed">Removed
 			</div>
 
-			<div id="tweet-overview">
-				<div id="incorrect-info">
-					<div># Incorrect - </div>
-					<div id="num-incorrect">Total: <span>0</span></div>,
-					<div id="num-incorrect-pos">Pos: <span>0</span></div>,
-					<div id="num-incorrect-neg">Neg: <span>0</span></div>
-				</div>
-				<div id="removed-info">
-					<div># Removed - </div>
-					<div id="num-removed">Total: <span>0</span></div>
-				</div>
+			<div id="tweet-list"></div>
+
+			<div id="evaluation-button" class="ion-android-arrow-dropright"></div>
+		</div>
+
+		<div id="evaluation-page">
+			<div id="evaluation-button-back" class="ion-android-arrow-dropleft"></div>
+
+			<div id="evaluation-table">
+				<div class='table-spacing'></div>
+				<div>Pos</div>
+				<div>Neg</div>
+				<div>Pos</div>
+				<div id="tp"><span>0</span></div>
+				<div id="fn"><span>0</span></div>
+				<div>Neg</div>
+				<div id="fp"><span>0</span></div>
+				<div id="tn"><span>0</span></div>
 			</div>
 
-			<div id="tweet-list"></div>
+			<div id="eval-values">
+				<div class="class-eval">Class: Positive</div>
+				<div id="pos-precision">- Precision = <span>0</span></div>
+				<div id="pos-recall">- Recall = <span>0</span></div>
+				<div id="pos-fmeasure">- F<sub>1</sub> Score = <span>0</span></div>
+
+				<div class="class-eval">Class: Negative</div>
+				<div id="neg-precision">- Precision = <span>0</span></div>
+				<div id="neg-recall">- Recall = <span>0</span></div>
+				<div id="neg-fmeasure">- F<sub>1</sub> Score = <span>0</span></div>
+			</div>
+			
 		</div>
 
 		<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.1.min.js') }}"></script>

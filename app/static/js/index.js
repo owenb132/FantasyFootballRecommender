@@ -11,21 +11,15 @@ $(document).ready(function(){
 	});
 
 	$('#more-results').click(function(){
-		$('#input-page').animate({
-			top: '-100%'
-		},300);
-		$('#stats-page').animate({
-			top: '0'
-		},300);
+		$('#input-page').animate({ top: '-100%' },300);
+		$('#stats-page').animate({ top: '0' },300);
+		$('#evaluation-page').animate({ top: '0' },300);
 	});
 
 	$('#search-button').click(function(){
-		$('#input-page').animate({
-			top: '0'
-		},300);
-		$('#stats-page').animate({
-			top: '100%'
-		},300);
+		$('#input-page').animate({ top: '0'	},300);
+		$('#stats-page').animate({ top: '100%' },300);
+		$('#evaluation-page').animate({ top: '100%' },300);
 	});
 
 	$('#tweet-filter input:checkbox').change(function(){
@@ -46,6 +40,17 @@ $(document).ready(function(){
 
 	$(document).on('click', '.add-button', function(){
 		includeTweet($(this).closest('.tweet'));
+	});
+
+	$('#evaluation-button').click(function(){
+		calcEval();
+		$('#stats-page').animate({ left: '-100%' },300);
+		$('#evaluation-page').animate({ left: '0' },300);
+	});
+
+	$('#evaluation-button-back').click(function(){
+		$('#stats-page').animate({ left: '0' },300);
+		$('#evaluation-page').animate({ left: '100%' },300);
 	});
 });
 
@@ -104,6 +109,8 @@ function addTweets(score, tweets){
 	$.each(tweets, function(key,value){
 		addToTweetList(value, key);
 	});
+
+	calcPercentages();
 }
 
 function addToTweetList(tweet, index){
@@ -145,6 +152,7 @@ function markIncorrect(tweet){
 		.addClass('correct-button')
 
 	applyFilters();
+	calcPercentages();
 }
 
 function markCorrect(tweet){
@@ -165,6 +173,7 @@ function markCorrect(tweet){
 		.addClass('incorrect-button');
 
 	applyFilters();
+	calcPercentages();
 }
 
 function ignoreTweet(tweet){
@@ -189,6 +198,7 @@ function ignoreTweet(tweet){
 	tweet.find('.correct-button').prop('disabled',true);
 
 	applyFilters();
+	calcPercentages();
 }
 
 function includeTweet(tweet){
@@ -212,16 +222,62 @@ function includeTweet(tweet){
 	tweet.find('.correct-button').prop('disabled',false);
 
 	applyFilters();
+	calcPercentages();
 }
 
 function calcPercentages(){
+	// Get count for each 
+	total = $('#tweet-list').find('.tweet:not(.removed)').length;
+	totalPos = $('#tweet-list').find('.pos:not(.removed)').length;
+	totalNeg = $('#tweet-list').find('.neg:not(.removed)').length;
+	totalCorrect = $('#tweet-list').find('.correct:not(.removed)').length;
+	//totalIncorrect = $('#tweet-list').find('.incorrect:not(.removed)').length;
+	totalPosCorrect = $('#tweet-list').find('.pos.correct:not(.removed):not(.incorrect)').length;
+	totalNegCorrect = $('#tweet-list').find('.neg.correct:not(.removed):not(.incorrect)').length;
 
+	posPercent = (total!=0) ? (totalPos/total*100) : 0;
+	negPercent = (total!=0) ? (totalNeg/total*100) : 0;
+
+	correct = (total!=0) ? (totalCorrect/total*100) : 0;
+	posCorrect = (totalPos!=0) ? (totalPosCorrect/totalPos*100) : 0;
+	negCorrect = (totalNeg!=0) ? (totalNegCorrect/totalNeg*100) : 0;
+
+	$('#pos-percent').text('%'+posPercent.toFixed(2));
+	$('#neg-percent').text('%'+negPercent.toFixed(2));
+
+	$('#perc-correct span').text('%'+correct.toFixed(1));
+	$('#perc-correct-pos span').text('%'+posCorrect.toFixed(1));
+	$('#perc-correct-neg span').text('%'+negCorrect.toFixed(1));
 }
 
 function addToTraining(tweet){
 
 }
 
+function calcEval(){
+	tp = $('#tweet-list').find('.pos.correct:not(.removed):not(.incorrect)').length;
+	tn = $('#tweet-list').find('.neg.correct:not(.removed):not(.incorrect)').length;
+	fp = $('#tweet-list').find('.neg.incorrect:not(.removed)').length;
+	fn = $('#tweet-list').find('.pos.incorrect:not(.removed)').length;
+	$('#tp span').text(tp);
+	$('#fn span').text(fn);
+	$('#fp span').text(fp);
+	$('#tn span').text(tn);
+
+	pP = (tp != 0) ? tp/(tp+fp) : 0;
+	pR = (tp != 0) ? tp/(tp+fn) : 0;
+	pF = (pP+pR != 0) ? (2*pP*pR)/(pP+pR) : 0;
+	$('#pos-precision span').text(pP.toFixed(2));
+	$('#pos-recall span').text(pR.toFixed(2));
+	$('#pos-fmeasure span').text(pF.toFixed(2));
+
+	nP = (tn != 0) ? tn/(tn+fn) : 0;
+	nR = (tn != 0) ? tn/(tn+fp) : 0;
+	nF = (nP+nR != 0) ? (2*nP*nR)/(nP+nR) : 0;
+	$('#neg-precision span').text(nP.toFixed(2));
+	$('#neg-recall span').text(nR.toFixed(2));
+	$('#neg-fmeasure span').text(nF.toFixed(2));
+}
 
 
 
