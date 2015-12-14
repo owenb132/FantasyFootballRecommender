@@ -43,12 +43,24 @@ def getPlayerTweets():
 	decision = "Insufficient Data"
 	if len(overallScore):
 		decision = max(overallScore, key=overallScore.get)
-		if decision == 'pos':
+		if len(tweets) < 10:
+			decision = 'Sit'
+		elif overallScore['pos'] == overallScore['neg']:
+			decision = 'Sit'
+		elif decision == 'pos':
 			decision = 'Start'
 		else:
 			decision = 'Sit'
 
 	return json.dumps({'status':'OK', 'tweets':tweets, 'score':overallScore, 'decision':decision})
 
+@app.route('/training', methods=['POST'])
+def addToTraining():
+	classification = request.form['classification']
+	tweet = request.form['text']
+	filepath = app.config["TRAINING_PATH"] + classification + '-review.txt'
+	with open(filepath, 'a') as f:
+		f.write(tweet.replace('\n', ' ') + '\n')
+	return json.dumps({'status':'OK'})
 
 

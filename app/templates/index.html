@@ -50,16 +50,18 @@
 					<div id="num-incorrect-neg">Neg: <span>0</span></div>
 				</div>
 
+				<!--
 				<div id="correct-percentage">
 					<div>Correct - </div>
 					<div id="perc-correct"><span>0</span></div>,
 					<div id="perc-correct-pos">Pos: <span>0</span></div>,
 					<div id="perc-correct-neg">Neg: <span>0</span></div>
 				</div>
+				-->
 
 				<div id="removed-info">
-					<div># Removed - </div>
-					<div id="num-removed">Total: <span>0</span></div>
+					<div># Removed: </div>
+					<div id="num-removed"><span>0</span></div>
 				</div>
 			</div>
 
@@ -103,9 +105,13 @@
 				<div id="neg-precision">- Precision = <span>0</span></div>
 				<div id="neg-recall">- Recall = <span>0</span></div>
 				<div id="neg-fmeasure">- F<sub>1</sub> Score = <span>0</span></div>
-			</div>
-			
+			</div>			
 		</div>
+
+		<form id="training-form" method="post">
+			<input type="hidden" id="training-text" name="text" value="">
+			<input type="hidden" id="training-class" name="classification" value="">
+		</form>
 
 		<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.1.min.js') }}"></script>
 		<script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>

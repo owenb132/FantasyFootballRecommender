@@ -52,6 +52,10 @@ $(document).ready(function(){
 		$('#stats-page').animate({ left: '0' },300);
 		$('#evaluation-page').animate({ left: '100%' },300);
 	});
+
+	$(document).on('click', '.update-button', function(){
+		addToTraining($(this).closest('.tweet'));
+	});
 });
 
 function lookupPlayer(name){
@@ -59,6 +63,7 @@ function lookupPlayer(name){
 	$('#tweet-list').empty();
 	$('#tweet-filter input').prop('checked', true);
 	$('#rem-check').prop('checked', false);
+	resetInfo();
 
 	if($.trim(name) == '')
 		showResult("Please Enter a Name");
@@ -123,6 +128,7 @@ function addToTweetList(tweet, index){
 			.append($('<div class="tweet-class">').text(tweet.classification))
 			.append($('<button class="incorrect-button">').text("Switch Class"))
 			.append($('<button class="remove-button">').text("Remove"))
+			.append($('<button class="update-button">').text("Add to Training"))
 		)
 	);
 }
@@ -237,21 +243,21 @@ function calcPercentages(){
 
 	posPercent = (total!=0) ? (totalPos/total*100) : 0;
 	negPercent = (total!=0) ? (totalNeg/total*100) : 0;
-
-	correct = (total!=0) ? (totalCorrect/total*100) : 0;
-	posCorrect = (totalPos!=0) ? (totalPosCorrect/totalPos*100) : 0;
-	negCorrect = (totalNeg!=0) ? (totalNegCorrect/totalNeg*100) : 0;
-
 	$('#pos-percent').text('%'+posPercent.toFixed(2));
 	$('#neg-percent').text('%'+negPercent.toFixed(2));
 
+	/*
+	totalNegIncorrect = $('#tweet-list').find('.neg.incorrect:not(.removed)').length;
+	totalPosIncorrect = $('#tweet-list').find('.pos.incorrect:not(.removed)').length
+	initTotalPos =  totalPosCorrect + totalNegIncorrect;
+	initTotalNeg = totalNegCorrect + totalPosIncorrect;
+	correct = (total!=0) ? (totalCorrect/total*100) : 0;
+	posCorrect = (totalPos!=0) ? (totalPosCorrect/initTotalPos*100) : 0;
+	negCorrect = (totalNeg!=0) ? (totalNegCorrect/initTotalNeg*100) : 0;
 	$('#perc-correct span').text('%'+correct.toFixed(1));
 	$('#perc-correct-pos span').text('%'+posCorrect.toFixed(1));
 	$('#perc-correct-neg span').text('%'+negCorrect.toFixed(1));
-}
-
-function addToTraining(tweet){
-
+	*/
 }
 
 function calcEval(){
@@ -279,5 +285,39 @@ function calcEval(){
 	$('#neg-fmeasure span').text(nF.toFixed(2));
 }
 
+function resetInfo(){
+	$('#pos-num span').text(0);
+	$('#neg-num span').text(0);
+	$('#pos-percent').text("%0.00");
+	$('#neg-percent').text("%0.00");
+	$('#num-incorrect span').text(0);
+	$('#num-incorrect-pos span').text(0);
+	$('#num-incorrect-neg span').text(0);
+	$('#num-removed span').text(0);
+}
 
+function addToTraining(tweet){
+	text = tweet.find('.tweet-text').text();
+	classification = tweet.find('.tweet-class').text();
+	$('#training-text').val(text);
+	$('#training-class').val(classification);
+	
+	var formData = new FormData($('#training-form')[0]);
+	var url = '/training';
 
+	$.ajax({
+		type:'POST',
+		url: url,
+		data: formData,
+		contentType: false,
+		processData: false,
+		cache: false,
+		success: function(result){
+			tweet.find('.update-button').hide();
+			alert('Tweet was successfully added to training data');
+		},
+		error: function(data, textStatus, jqXHR){
+			alert('Error. Try again later');
+		}
+	});
+}
