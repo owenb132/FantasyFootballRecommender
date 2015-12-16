@@ -156,6 +156,7 @@ function markIncorrect(tweet){
 	tweet.find($('.incorrect-button'))
 		.removeClass('incorrect-button')
 		.addClass('correct-button')
+	tweet.find($('.update-button')).show();
 
 	applyFilters();
 	calcPercentages();
@@ -202,6 +203,7 @@ function ignoreTweet(tweet){
 
 	tweet.find('.incorrect-button').prop('disabled',true);
 	tweet.find('.correct-button').prop('disabled',true);
+	tweet.find('.update-button').prop('disabled',true);
 
 	applyFilters();
 	calcPercentages();
@@ -226,6 +228,7 @@ function includeTweet(tweet){
 
 	tweet.find('.incorrect-button').prop('disabled',false);
 	tweet.find('.correct-button').prop('disabled',false);
+	tweet.find('.update-button').prop('disabled',false);
 
 	applyFilters();
 	calcPercentages();
@@ -237,7 +240,6 @@ function calcPercentages(){
 	totalPos = $('#tweet-list').find('.pos:not(.removed)').length;
 	totalNeg = $('#tweet-list').find('.neg:not(.removed)').length;
 	totalCorrect = $('#tweet-list').find('.correct:not(.removed)').length;
-	//totalIncorrect = $('#tweet-list').find('.incorrect:not(.removed)').length;
 	totalPosCorrect = $('#tweet-list').find('.pos.correct:not(.removed):not(.incorrect)').length;
 	totalNegCorrect = $('#tweet-list').find('.neg.correct:not(.removed):not(.incorrect)').length;
 
@@ -246,9 +248,14 @@ function calcPercentages(){
 	$('#pos-percent').text('%'+posPercent.toFixed(2));
 	$('#neg-percent').text('%'+negPercent.toFixed(2));
 
-	/*
+	totalIncorrect = $('#tweet-list').find('.incorrect:not(.removed)').length;
+	totalPosIncorrect = $('#tweet-list').find('.pos.incorrect:not(.removed)').length;
 	totalNegIncorrect = $('#tweet-list').find('.neg.incorrect:not(.removed)').length;
-	totalPosIncorrect = $('#tweet-list').find('.pos.incorrect:not(.removed)').length
+	$('#num-incorrect span').text(totalIncorrect);
+	$('#num-incorrect-pos span').text(totalNegIncorrect);
+	$('#num-incorrect-neg span').text(totalPosIncorrect);
+
+	/*
 	initTotalPos =  totalPosCorrect + totalNegIncorrect;
 	initTotalNeg = totalNegCorrect + totalPosIncorrect;
 	correct = (total!=0) ? (totalCorrect/total*100) : 0;
