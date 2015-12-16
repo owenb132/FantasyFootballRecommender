@@ -103,11 +103,23 @@ def classify(classifier, d):
 				score[c] += math.log(condprob[t][c])
 	#return max(score, key=score.get)
 	return(score)
+'''
+def test(classifier):
+	testDocs = {}
+	previous_dir = os.getcwd()
+	os.chdir(app.config['TEST_PATH'])
+	for file in os.listdir('.'):
+		if file.endswith(".txt"):
+			className = re.match(r'^[a-zA-Z]+', file).group(0)
+			docIndex = 1
+			fOpen = open(file,'r',encoding='utf-8', errors='ignore')
+			fRead = fOpen.readlines()
+			for tweet in fRead:
+				docName = className + str(docIndex)
+				classDocs[className].append(docName)
+				docTokens[docName] = [strip_punctuation(w.lower()) for w in nltk.word_tokenize(tweet) if w.lower() not in app.config['STOPWORDS']]
+				testDocs[docName] = 
 
-
-
-
-
-
+'''
 
 

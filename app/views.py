@@ -58,7 +58,7 @@ def getPlayerTweets():
 def addToTraining():
 	classification = request.form['classification']
 	tweet = request.form['text']
-	filepath = app.config["TRAINING_PATH"] + classification + '-review.txt'
+	filepath = app.config["REVIEW_PATH"] + classification + '-review.txt'
 	with open(filepath, 'a') as f:
 		f.write(tweet.replace('\n', ' ') + '\n')
 	return json.dumps({'status':'OK'})
