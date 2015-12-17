@@ -103,7 +103,9 @@ def classify(classifier, d):
 				score[c] += math.log(condprob[t][c])
 	#return max(score, key=score.get)
 	return(score)
+
 '''
+# Runs classifier against test data
 def test(classifier):
 	testDocs = {}
 	previous_dir = os.getcwd()

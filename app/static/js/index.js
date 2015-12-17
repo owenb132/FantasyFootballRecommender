@@ -10,54 +10,52 @@ $(document).ready(function(){
      	}
 	});
 
+	// Display the stats page from search page
 	$('#more-results').click(function(){
 		$('#input-page').animate({ top: '-100%' },300);
 		$('#stats-page').animate({ top: '0' },300);
 		$('#evaluation-page').animate({ top: '0' },300);
 	});
 
+	// Display the search page from stats page
 	$('#search-button').click(function(){
 		$('#input-page').animate({ top: '0'	},300);
 		$('#stats-page').animate({ top: '100%' },300);
 		$('#evaluation-page').animate({ top: '100%' },300);
 	});
 
+	// Applies filters to tweet list
 	$('#tweet-filter input:checkbox').change(function(){
 		applyFilters();
     });
 
-	$(document).on('click', '.incorrect-button', function(){
-		markIncorrect($(this).closest('.tweet'));
-	});
+	// Marks the selected tweet as incorrect
+	$(document).on('click', '.incorrect-button', function(){ markIncorrect($(this).closest('.tweet')); });
+	// Marks the selected tweet as correct
+	$(document).on('click', '.correct-button', function(){ markCorrect($(this).closest('.tweet')); });
+	// Marks the selected tweet to be ignored
+	$(document).on('click', '.remove-button', function(){ ignoreTweet($(this).closest('.tweet')); });
+	// Marks the selected tweet to be included
+	$(document).on('click', '.add-button', function(){ includeTweet($(this).closest('.tweet')); });
 
-	$(document).on('click', '.correct-button', function(){
-		markCorrect($(this).closest('.tweet'));
-	});
-
-	$(document).on('click', '.remove-button', function(){
-		ignoreTweet($(this).closest('.tweet'));
-	});
-
-	$(document).on('click', '.add-button', function(){
-		includeTweet($(this).closest('.tweet'));
-	});
-
+	// Calculate evaluation and display the evaluations page
 	$('#evaluation-button').click(function(){
 		calcEval();
 		$('#stats-page').animate({ left: '-100%' },300);
 		$('#evaluation-page').animate({ left: '0' },300);
 	});
 
+	// Display the stats page from the evaluation page
 	$('#evaluation-button-back').click(function(){
 		$('#stats-page').animate({ left: '0' },300);
 		$('#evaluation-page').animate({ left: '100%' },300);
 	});
 
-	$(document).on('click', '.update-button', function(){
-		addToTraining($(this).closest('.tweet'));
-	});
+	// Adds the selected tweet to the training data
+	$(document).on('click', '.update-button', function(){ addToTraining($(this).closest('.tweet')); });
 });
 
+// Gets tweets/classification for a player
 function lookupPlayer(name){
 	$('#more-results').hide();
 	$('#tweet-list').empty();
@@ -65,9 +63,10 @@ function lookupPlayer(name){
 	$('#rem-check').prop('checked', false);
 	resetInfo();
 
+	// No input
 	if($.trim(name) == '')
 		showResult("Please Enter a Name");
-	
+	// Ajax call to flask backend service
 	else{
 		$('#ajax-loader').show();
 		$('#result').css('opacity', 0);
@@ -96,28 +95,30 @@ function lookupPlayer(name){
 	}
 }
 
+// Displays a message on the search page
 function showResult(message){
 	$('#result').css('opacity', 0);
 	$('#result').text(message).animate({opacity:1});
 }
 
+// Displays the 'more statistics' button on the search page
 function showMore(){
 	$('#more-results').css('opacity', 0);
 	$('#more-results').show();
 	$('#more-results').animate({opacity:1});
 }
 
+// Gets the json data from the service call
 function addTweets(score, tweets){
 	$('#pos-num span').text(score['pos']);
 	$('#neg-num span').text(score['neg']);
 
-	$.each(tweets, function(key,value){
-		addToTweetList(value, key);
-	});
+	$.each(tweets, function(key,value){	addToTweetList(value, key);	});
 
 	calcPercentages();
 }
 
+// Appends a tweet to the tweet list
 function addToTweetList(tweet, index){
 	$('#tweet-list').append($('<div class="tweet correct included">').addClass(tweet.classification)
 		.append($('<div class="tweet-index">').text(index))
@@ -133,6 +134,7 @@ function addToTweetList(tweet, index){
 	);
 }
 
+// Applies filters to the tweet list
 function applyFilters(){
 	$('.tweet').show();
 	unchecked = $('#tweet-filter').find('input:checkbox:not(:checked)');
@@ -141,6 +143,7 @@ function applyFilters(){
     });
 }
 
+// Marks tweet as incorrect
 function markIncorrect(tweet){
 	tweet.removeClass('correct').addClass('incorrect');
 	classDiv = tweet.find('.tweet-class');
@@ -162,6 +165,7 @@ function markIncorrect(tweet){
 	calcPercentages();
 }
 
+// Marks tweet as correct
 function markCorrect(tweet){
 	tweet.removeClass('incorrect').addClass('correct');
 	classDiv = tweet.find('.tweet-class');
@@ -183,6 +187,7 @@ function markCorrect(tweet){
 	calcPercentages();
 }
 
+// Ignores tweet from calculations
 function ignoreTweet(tweet){
 	tweet.removeClass('included').addClass('removed');
 	classDiv = tweet.find('.tweet-class');
@@ -209,6 +214,7 @@ function ignoreTweet(tweet){
 	calcPercentages();
 }
 
+// Includes tweet from classfication
 function includeTweet(tweet){
 	tweet.removeClass('removed').addClass('included');
 	curClass = tweet.find('.tweet-class').text();
@@ -234,6 +240,7 @@ function includeTweet(tweet){
 	calcPercentages();
 }
 
+// Calculate percentages
 function calcPercentages(){
 	// Get count for each 
 	total = $('#tweet-list').find('.tweet:not(.removed)').length;
@@ -242,12 +249,12 @@ function calcPercentages(){
 	totalCorrect = $('#tweet-list').find('.correct:not(.removed)').length;
 	totalPosCorrect = $('#tweet-list').find('.pos.correct:not(.removed):not(.incorrect)').length;
 	totalNegCorrect = $('#tweet-list').find('.neg.correct:not(.removed):not(.incorrect)').length;
-
+	// Get percentages for class
 	posPercent = (total!=0) ? (totalPos/total*100) : 0;
 	negPercent = (total!=0) ? (totalNeg/total*100) : 0;
 	$('#pos-percent').text('%'+posPercent.toFixed(2));
 	$('#neg-percent').text('%'+negPercent.toFixed(2));
-
+	// Get number of incorrect
 	totalIncorrect = $('#tweet-list').find('.incorrect:not(.removed)').length;
 	totalPosIncorrect = $('#tweet-list').find('.pos.incorrect:not(.removed)').length;
 	totalNegIncorrect = $('#tweet-list').find('.neg.incorrect:not(.removed)').length;
@@ -267,7 +274,9 @@ function calcPercentages(){
 	*/
 }
 
+// Calculate classifier evaluations
 function calcEval(){
+	// Get tp, tn, fp, fn values for confusion matrix
 	tp = $('#tweet-list').find('.pos.correct:not(.removed):not(.incorrect)').length;
 	tn = $('#tweet-list').find('.neg.correct:not(.removed):not(.incorrect)').length;
 	fp = $('#tweet-list').find('.neg.incorrect:not(.removed)').length;
@@ -276,14 +285,14 @@ function calcEval(){
 	$('#fn span').text(fn);
 	$('#fp span').text(fp);
 	$('#tn span').text(tn);
-
+	// Precision, Recall, FMeasure for positive class
 	pP = (tp != 0) ? tp/(tp+fp) : 0;
 	pR = (tp != 0) ? tp/(tp+fn) : 0;
 	pF = (pP+pR != 0) ? (2*pP*pR)/(pP+pR) : 0;
 	$('#pos-precision span').text(pP.toFixed(2));
 	$('#pos-recall span').text(pR.toFixed(2));
 	$('#pos-fmeasure span').text(pF.toFixed(2));
-
+	// Precision, Recall, FMeasure for negative class
 	nP = (tn != 0) ? tn/(tn+fn) : 0;
 	nR = (tn != 0) ? tn/(tn+fp) : 0;
 	nF = (nP+nR != 0) ? (2*nP*nR)/(nP+nR) : 0;
@@ -292,6 +301,7 @@ function calcEval(){
 	$('#neg-fmeasure span').text(nF.toFixed(2));
 }
 
+// Clears all data fields
 function resetInfo(){
 	$('#pos-num span').text(0);
 	$('#neg-num span').text(0);
@@ -303,6 +313,7 @@ function resetInfo(){
 	$('#num-removed span').text(0);
 }
 
+// Adds the tweet to a training review file
 function addToTraining(tweet){
 	text = tweet.find('.tweet-text').text();
 	classification = tweet.find('.tweet-class').text();
