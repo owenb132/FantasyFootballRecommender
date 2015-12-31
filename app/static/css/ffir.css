@@ -1,0 +1,355 @@
+body{
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	font-family: 'Quicksand', sans-serif;
+	background: #F2F2F2;
+}
+
+
+#search-page{
+	position: absolute;
+	top: 0; left: 0; right: 0;
+	height: 100%;
+	background: #F2F2F2;
+    background: -webkit-linear-gradient(#44708F, #F2F2F2); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#44708F, #F2F2F2); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#44708F, #F2F2F2); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#44708F, #F2F2F2); /* Standard syntax */
+}
+/*
+#title{
+	position: relative;
+	width: 100%;
+	height: auto;
+	margin: 70px auto;
+	text-align: center;
+	font-size: 30px;
+}*/
+
+#search-form{
+	position: relative;
+	width: 55%;
+	max-width: 500px;
+	height: auto;
+	margin: 160px auto 0 auto;
+}
+
+#player-input{
+	width: 100%;
+	height: 100%;
+	padding: 15px;
+	box-sizing: border-box;
+	border: none;
+	border-radius: 4px;
+	-webkit-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.48);
+	-moz-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.48);
+	box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.48);	
+	font-size: 23px;
+	font-family: 'Quicksand', sans-serif;
+}
+
+#search-result{
+	position: relative;
+	width: 100%;
+	height: auto;
+	margin-top: 50px;
+	text-align: center;
+}
+
+#search-loader{
+	width: 100px;
+	height: 100px;
+	margin: 0 auto;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	display: none;
+}
+
+#search-decision{
+	font-size: 31px;
+	display: none;
+	color: #2B4C64;
+}
+
+#more-button, #overview-back-button{
+	width: 120px;
+	height: auto;
+	position: absolute;
+	left: 0; right: 0;
+	margin: auto;
+	text-align: center;
+	padding: 10px;
+	cursor: pointer;
+	color: #2B4C64;
+}
+#more-button:hover, #overview-back-button:hover, #eval-button:hover, #eval-back-button:hover{
+	color: #44708F;
+}
+#more-button .ion-android-arrow-dropdown, #overview-back-button .ion-android-arrow-dropup{
+	font-size: 50px;
+}
+
+#more-button{ bottom: 0; display: none; }
+#overview-back-button{ top: 0; }
+
+
+
+
+
+#overview-page{
+	position: absolute;
+	top: 100%;
+	width: 100%;
+	height: 100%;
+
+	background: #F2F2F2;
+    background: -webkit-linear-gradient(#F2F2F2, #44708F); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#F2F2F2, #44708F); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#F2F2F2, #44708F); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#F2F2F2, #44708F); /* Standard syntax */
+}
+
+#overview-summary{
+	position: absolute;
+	top: 115px;
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+#overview-summary div{
+	flex: 1;
+	flex-basis: 50%;
+	text-align: center;
+}
+
+.class-overview{
+	font-size: 21px;
+}
+.class-tweets, .class-score{
+	font-size: 19px;
+}
+
+#tweet-filter{
+	position: absolute;
+	top: 210px; left: 0; right: 0;
+	width: 85%;
+	height: auto;
+	margin: auto;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+#tweet-filter div{
+	flex: 1;
+	flex-basis: 100px;
+	height: 25px;
+}
+
+#tweet-list{
+	position: absolute;
+	top: 235px; bottom: 0; left: 0; right: 0;
+	width: 85%;
+	margin: auto;
+	overflow: auto;
+	border-top: 1px #7B99AE solid;
+}
+
+.tweet{
+	width: 99.5%;
+	height: 200px;
+	border:1px lightgrey solid;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: rgba(243, 243, 243, 0.1);
+}
+.tweet:hover{
+	background-color: rgba(243, 243, 243, 0.3);
+}
+
+.tweet-index{
+	padding: 0 20px;
+}
+
+.tweet-text{
+	flex: 1;
+}
+
+.tweet-info{
+	width: 95px;
+	padding: 0 20px;
+	font-size: 13px;
+}
+
+.tweet-info div{
+	width: 100%;
+	text-align: center;
+	margin: 1px 0;
+}
+.tweet-info button{
+	width: 100%;
+	float: left;
+	clear: both;
+	margin: 1px 0;
+}
+
+#eval-button{
+	position: absolute;
+	right: 0px; top: 50%;
+	font-size: 30px;
+	padding: 2.5%;
+	cursor: pointer;
+}
+
+#evaluation-page{
+	position: absolute;
+	top: 100%; left: 100%;
+	width: 100%;
+	height: 100%;
+	background: #F2F2F2;
+    background: -webkit-linear-gradient(#F2F2F2, #44708F); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#F2F2F2, #44708F); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#F2F2F2, #44708F); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#F2F2F2, #44708F); /* Standard syntax */
+}
+
+#eval-back-button{
+	position: absolute;
+	top: 50%; left: 0px;
+	font-size: 30px;
+	padding: 15px;
+}
+
+#removed-info{
+	position: absolute;
+	top: 50px; left: 0; right: 0;
+	width: 75%;
+	height: auto;
+	margin: auto;
+	font-size: 20px;	
+}
+
+#eval-table{
+	position: absolute;
+	top: 100px; left: 0; right: 0;
+	width: 75%;
+	height: auto;
+	margin: auto;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.table-header-spacing, .table-header-side{
+	flex-basis: 25%;
+}
+.table-header-top, .table{
+	flex-basis: 75%;
+}
+
+.table{
+	border: 1px black solid;
+	border-radius: 4px;
+	box-sizing: border-box;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(243, 243, 243, 0.3);
+}
+
+.table-spacing{
+	border: none !important;
+}
+.table div{
+	flex-basis: 33.33%;
+	border: 1px lightgrey solid;
+	box-sizing: border-box;
+	padding: 5px;
+}
+
+#eval-vals{
+	position: absolute;
+	top: 300px; left: 0; right: 0;
+	width: 75%;
+	height: auto;
+	margin: auto;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+}
+
+#eval-vals > div{
+	min-width: 165px;
+	padding: 15px;
+	box-sizing: border-box;
+}
+
+eval-vals > div div{
+	width: 100%;
+	float: left;
+}
+
+
+@media screen and (max-width: 705px){
+	#tweet-list{ top: 260px; }
+}
+
+@media screen and (max-width: 475px){
+	#player-input{ font-size: 20px; }
+	.class-overview{ font-size: 18px; }
+	.class-tweets, .class-score{ font-size: 16px; }
+
+	#tweet-filter{ top: 190px; }
+	#tweet-list{ top: 240px;}
+}
+
+@media screen and (max-width: 450px){
+	.tweet-text{
+		font-size: 13px; 
+		word-wrap: break-word;
+	}
+	.tweet-info { width: 80px; }
+	.tweet-info div{ font-size: 11px; }
+	.tweet-info button{ font-size: 9px !important; }
+}
+
+@media screen and (max-width: 390px){
+	#player-input{ font-size: 15px;	}
+	#overview-back-button .ion-android-arrow-dropup{ font-size: 30px; }
+
+	#overview-summary{ top: 80px; }
+	#tweet-filter{ top: 155px; }
+	#tweet-list{ top: 205px;}
+
+	.tweet-text{ font-size: 12px; }
+}
+
+@media screen and (max-width: 352px){
+	#tweet-list{ top: 230px;}
+
+	.tweet-text{ font-size: 10px; }
+	.tweet-info { width: 75px; }
+	.tweet-info div{ font-size: 10px; }
+	.tweet-info button{ font-size: 8px !important; }
+
+	#removed-info{ font-size: 15px; }
+}
+
+@media screen and (max-width: 310px){
+	#player-input{ font-size: 12px; }
+}

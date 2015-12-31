@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Fantasy Football Start/Sit Recommendations</title>
+		<meta charset=utf-8 />
+	    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0" />
+	    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/ffir.css') }}">
+	    <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+	    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='ionicons-2.0.1/css/ionicons.css') }}">
+	</head>
+	<body>
+		<div id="search-page">
+			<div id="title"></div>
+			<form id="search-form" method="post">
+				<input type="text" id="player-input" name="name" placeholder="Enter player name">
+			</form>
+
+			<div id="search-result">
+				<div id="search-loader" style="background-image: url({{ url_for('static', filename='img/loader.gif') }})"></div>
+				<div id="search-decision">Start</div>
+			</div>
+
+			<div id="more-button">
+				<div>More Statistics</div>
+				<div class="ion-android-arrow-dropdown"></div>
+			</div>
+		</div>
+
+		<div id="overview-page">
+			<div id="overview-back-button">
+				<div class="ion-android-arrow-dropup"></div>
+				<div>Back</div>
+			</div>
+
+			<div id="overview-summary">
+				<div class="class-overview">Positive</div>
+				<div class="class-overview">Negative</div>
+				<div class="class-tweets">Tweet #: <span id="pos-num">0</span>    (<span id="pos-percent">0%</span>)</div>
+				<div class="class-tweets">Tweet #: <span id="neg-num">0</span>    (<span id="neg-percent">0%</span>)</div>
+				<!--
+				<div class="class-score">Score: <span id="pos-score">0</span></div>
+				<div class="class-score">Score: <span id="neg-score">0</span></div>
+				-->
+			</div>
+
+			
+			<div id="tweet-filter">
+				<div><input type="checkbox" id="pos-check" name="classification" value="pos" checked>Pos</div>
+				<div><input type="checkbox" id="neg-check" name="classification" value="neg" checked>Neg</div>
+				<div><input type="checkbox" id="correct-check" name="classification" value="correct" checked>Correct</div>
+				<div><input type="checkbox" id="incorrect-check" name="classification" value="incorrect" checked>Incorrect</div>
+				<div><input type="checkbox" id="included-check" name="classification" value="included" checked>Included</div>
+				<div><input type="checkbox" id="rem-check" name="classification" value="removed">Removed</div>
+			</div>
+
+			<div id="tweet-list"></div>
+
+			<div id="eval-button" class="ion-android-arrow-dropright"></div>
+		</div>
+
+		<div id="evaluation-page">
+			<div id="eval-back-button" class="ion-android-arrow-dropleft"></div>
+
+			<div id="removed-info"># of Tweets Removed: <span id="num-removed">0</span></div>
+
+			<div id="eval-table">
+				<div class="table-header-spacing"></div>
+				<div class="table-header-top">Classifier Result</div>
+				<div class="table-header-side">Actual Class</div>
+				<div class="table">
+					<div class='table-spacing'></div>
+					<div>Pos</div>
+					<div>Neg</div>
+					<div>Pos</div>
+					<div id="tp">0</div>
+					<div id="fn">0</div>
+					<div>Neg</div>
+					<div id="fp">0</div>
+					<div id="tn">0</div>
+				</div>
+			</div>
+
+			<div id="eval-vals">
+				<div id="pos-eval">
+					<div>Class: Pos</div>
+					<div>Precision = <span id="pos-precision">0</span></div>
+					<div>Recall = <span id="pos-recall">0</span></div>
+					<div>F<sub>1</sub> Score = <span id="pos-fmeasure">0</span></div>
+				</div>
+
+				<div id="neg-eval">
+					<div>Class: Neg</div>
+					<div>Precision = <span id="neg-precision">0</span></div>
+					<div>Recall = <span id="neg-recall">0</span></div>
+					<div>F<sub>1</sub> Score = <span id="neg-fmeasure">0</span></div>
+				</div>
+			</div>
+		</div>
+
+		<form id="training-form" method="post">
+			<input type="hidden" id="training-text" name="text" value="">
+			<input type="hidden" id="training-class" name="classification" value="">
+		</form>
+
+		<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.1.min.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/ffir.js') }}"></script>
+	</body>
+</html>
