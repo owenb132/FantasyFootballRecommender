@@ -7,12 +7,7 @@ import tweepy, nltk, re
 def index():
 	return render_template('index.html')
 
-@app.route('/ffir')
-@app.route('/projects/ffir')
-def ffir():
-	return render_template('Projects/ffir.html')
-
-@app.route('/projects/ffir/player', methods=['POST'])
+@app.route('/player', methods=['POST'])
 def getPlayerTweets():
 	# Initialize naive bayes classifier
 	nb = util.initClassifier(app.config['TRAINING_PATH'], app.config['STOPWORDS'])
@@ -76,7 +71,7 @@ def getPlayerTweets():
 	return json.dumps({'status':'OK', 'tweets':tweets, 'score':overallScore, 'decision':decision})
 
 # Adds a tweet to the training data
-@app.route('/projects/ffir/training', methods=['POST'])
+@app.route('/training', methods=['POST'])
 def addToTraining():
 	classification = request.form['classification']
 	tweet = request.form['text']

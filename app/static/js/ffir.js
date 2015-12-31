@@ -94,7 +94,7 @@ function queryPlayer(name){
 		showLoader();
 		// Get ajax request data + url
 		var formData = new FormData($('#search-form')[0]);
-		var url = '/projects/ffir/player';
+		var url = '/player';
 
 		$.ajax({
 			type: 'POST',
@@ -292,7 +292,7 @@ function addToTraining(tweet){
 	$('#training-class').val(classification);
 	
 	var formData = new FormData($('#training-form')[0]);
-	var url = '/projects/ffir/training';
+	var url = '/training';
 
 	$.ajax({
 		type:'POST',

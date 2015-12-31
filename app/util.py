@@ -1,5 +1,6 @@
 import nltk, os, re, math, codecs
 from string import punctuation
+from app import app
 
 # Removes punctuation
 def strip_punctuation(s):
@@ -91,7 +92,6 @@ def classify(classifier, d):
 
 	score = {}
 	for c in classes:
-		math.log(prior[c])
 		score[c] = math.log(prior[c])
 		for t in d:
 			if t in condprob:
