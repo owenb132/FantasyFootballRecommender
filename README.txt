@@ -13,13 +13,8 @@ virtualenv venv
 To activate the virtualenv use:
 . venv/bin/activate
 
-while the virtualenv is active install Flask
-pip install Flask
-
-the application also uses tweepy so install that too
-pip install tweepy
-
-I'm not entirely sure of how to install FLask on Windows but you should be able to install pip which will allow you to install the other requirements
+while the virtualenv is active install all the requirements with
+pip install -r requirements.txt
 
 Before running the application you also need to have a Twitter development account and add your Twitter API access information to the config.py file
 
