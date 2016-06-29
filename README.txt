@@ -40,5 +40,6 @@ to start a local server
 Then in a browser go to the localhost:
 http://127.0.0.1:5000/
 
+A demo can be found at www.williammakabenta.com/ffir
+More information on this project can be found at http://williammakabenta.com/projects
 
-I do plan on hosting this project on my own personal website at some point. Whenever I do get around to doing that, I'll probably have it up on www.williammakabenta.com/ffir
